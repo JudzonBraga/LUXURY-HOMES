@@ -1,6 +1,6 @@
- // ============================================
-        // DATOS DE PROPIEDADES POR CIUDAD
-        // ============================================
+// ============================================
+// DATOS DE PROPIEDADES POR CIUDAD
+// ============================================
 
         const propertiesData = {
             arequipa: [
@@ -194,7 +194,7 @@
                             <div class="detail-location">${selectedProperty.location}</div>
                             <div class="detail-description">${selectedProperty.description}</div>
                             <div class="detail-cta">
-                                <a href="#" class="btn-luxury" style="padding: 0.5rem 1rem; font-size: 0.7rem;">AGENDAR VISITA</a>
+                                <a href="https://wa.me/51999999999?text=Hola,%20quiero%20más%20información" target="_blank" class="btn-luxury" style="padding: 0.5rem 1rem; font-size: 0.7rem;">AGENDAR VISITA</a>
                             </div>
                         </div>
                     </div>
@@ -313,7 +313,9 @@
             closeNav();
             setTimeout(() => {
                 if (sectionId === 'contact') {
-                    alert('📞 Contáctanos: +51 1 789 1234\n✉️ luxury@homes.pe');
+                    const message = encodeURIComponent('Hola, vi su página LUXURY HOMES y me interesa conocer más sobre sus propiedades de lujo.');
+                    window.open(`https://wa.me/51999999999?text=${message}`, '_blank');
+                    // alert('📞 Contáctanos: +51 1 789 1234\n✉️ luxury@homes.pe');
                     return;
                 }
                 if (sectionId === 'locations') {
