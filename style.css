@@ -1,0 +1,906 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A;
+            color: #ECE9E0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .vertical-container {
+            overflow-y: scroll;
+            height: 100vh;
+            scroll-behavior: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .vertical-section {
+            scroll-snap-align: start;
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 0;
+            scroll-behavior: smooth;
+            height: 100%;
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
+            transition: opacity 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .horizontal-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .horizontal-item {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bg-media {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            filter: brightness(0.65) contrast(1.1);
+            transition: transform 0.5s ease;
+        }
+
+        .overlay-text {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 85%;
+            padding: 2rem;
+            backdrop-filter: blur(2px);
+            background: rgb(0 0 0 / 28%);
+            border-radius: 24px;
+            border-left: 3px solid #D4AF37;
+            animation: fadeUp 0.9s ease-out;
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title-xl {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+            color: #D4AF37;
+        }
+
+        .description {
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .btn-luxury {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            border: 1px solid #D4AF37;
+            background: transparent;
+            color: #ECE9E0;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.4s;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .btn-luxury:hover {
+            background: #D4AF37;
+            color: #0A0A0A;
+            border-color: #D4AF37;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: #ccc;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            backdrop-filter: blur(5px);
+        }
+
+        .horizontal-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 15;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.5rem 1rem;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            backdrop-filter: blur(4px);
+            border-radius: 30px;
+        }
+
+        .property-card-info {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 15;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+            padding: 1rem 2rem;
+            border-left: 3px solid #D4AF37;
+            max-width: 70%;
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        .property-price {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #D4AF37;
+        }
+
+        .property-name {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .horizontal-scroll.exiting {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        @keyframes gentleFadeIn {
+            from {
+                opacity: 0.7;
+                transform: scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .horizontal-scroll.entering {
+            animation: gentleFadeIn 0.4s ease-out;
+        }
+
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            color: white;
+            font-size: 2rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            z-index: 20;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .nav-arrow:hover {
+            background: #D4AF37;
+            color: black;
+        }
+
+        .nav-left {
+            left: 1rem;
+        }
+
+        .nav-right {
+            right: 1rem;
+        }
+
+        /* ============================================ */
+        /* SECCIÓN: LOCACIONES */
+        /* ============================================ */
+
+        .locations-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0A0A0A 0%, #141414 100%);
+            position: relative;
+        }
+
+        .locations-sidebar {
+            width: 30%;
+            height: 100%;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            border-right: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 2;
+        }
+
+        .locations-title {
+            font-size: 2.5rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            color: #D4AF37;
+        }
+
+        .locations-subtitle {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: #888;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 1rem;
+        }
+
+        .cities-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .city-btn {
+            background: transparent;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 0.8rem 1rem;
+            color: #ECE9E0;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .city-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .city-btn:hover {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateX(5px);
+        }
+
+        .city-btn:hover::before {
+            left: 100%;
+        }
+
+        .city-btn.active {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.2);
+            color: #D4AF37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        /* ============================================ */
+        /* CARRUSEL MEJORADO */
+        /* ============================================ */
+
+        .locations-carousel {
+            width: 70%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: #0A0A0A;
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .carousel-no-selection {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-cards-container {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 2rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+        }
+
+        .carousel-cards-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-card {
+            min-width: 350px;
+            width: 350px;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            text-align: center;
+        }
+
+        .carousel-card:hover {
+            transform: translateY(-8px);
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .carousel-card-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+        }
+
+        .carousel-card-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #D4AF37;
+        }
+
+        .carousel-card-title {
+            font-size: 0.95rem;
+            margin: 0.3rem 0;
+        }
+
+        .carousel-card-location {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        .carousel-nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            color: #D4AF37;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .carousel-nav-arrow:hover {
+            background: #D4AF37;
+            color: #0A0A0A;
+        }
+
+        .carousel-nav-left {
+            left: 1rem;
+        }
+
+        .carousel-nav-right {
+            right: 1rem;
+        }
+
+        .carousel-with-selection {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .selection-top-row {
+            height: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            overflow-x: auto;
+            animation: fadeInRow 1s ease-out 0.2s both;
+        }
+
+        .selection-top-card {
+            min-width: 180px;
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .selection-top-card:hover {
+            border-color: #D4AF37;
+            transform: translateY(-3px);
+        }
+
+        .selection-top-card.active {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .selection-top-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .selection-top-card .card-price {
+            font-size: 0.7rem;
+            color: #D4AF37;
+            margin-top: 0.3rem;
+        }
+
+        .selection-bottom-row {
+            height: 80%;
+            display: flex;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
+        .selection-image {
+            width: 80%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .selection-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s ease;
+        }
+
+        .selection-image:hover img {
+            transform: scale(1.2);
+        }
+
+        .selection-details {
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .selection-details .detail-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #D4AF37;
+        }
+
+        .selection-details .detail-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .selection-details .detail-location {
+            font-size: 0.9rem;
+            color: #aaa;
+            letter-spacing: 0.05em;
+        }
+
+        .selection-details .detail-description {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #ccc;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            padding-top: 1rem;
+        }
+
+        .selection-details .detail-cta {
+            margin-top: 1.5rem;
+        }
+
+        footer {
+            background: #050505;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: #777;
+        }
+
+        /* Animación de entrada para el panel de detalle */
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .selection-bottom-row {
+            animation: slideUpFade 1s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+        }
+
+        /* Animación para los cards que se mueven a la fila superior */
+        @keyframes cardMoveUp {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+        }
+
+        .carousel-card.moving-up {
+            animation: cardMoveUp 1s ease-out forwards;
+            pointer-events: none;
+        }
+
+        /* Animación para la fila superior cuando aparece */
+        @keyframes fadeInRow {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* ============================================ */
+        /* PESTAÑA SUPERPUESTA SUPERIOR (NAV) */
+        /* ============================================ */
+
+        .side-nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: flex-start;
+            pointer-events: none;
+        }
+
+        .nav-tab {
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 0 0 12px 12px;
+            padding: 0.6rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            pointer-events: auto;
+            margin: auto;
+        }
+
+        .nav-tab:hover {
+            background: rgba(212, 175, 55, 0.85);
+            padding: 0.6rem 1.8rem;
+        }
+
+        .nav-tab i {
+            font-size: 1.2rem;
+            color: #D4AF37;
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover i {
+            color: #0A0A0A;
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: -320px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 0 0 16px 16px;
+            transition: top 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-menu.open {
+            top: 0;
+        }
+
+        .nav-menu.open~.side-nav-container .nav-tab,
+        body:has(.nav-menu.open) .nav-tab {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-menu h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: #D4AF37;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .nav-items-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            color: #ECE9E0;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            border-radius: 8px;
+            min-width: 80px;
+        }
+
+        .nav-item i {
+            font-size: 1.3rem;
+            color: #D4AF37;
+            transition: all 0.3s;
+        }
+
+        .nav-item span {
+            transition: all 0.3s;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-item:hover {
+            border-bottom-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .nav-item:hover i {
+            transform: translateY(-2px);
+        }
+
+        .nav-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #D4AF37;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .nav-close:hover {
+            transform: rotate(90deg);
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .property-card-info {
+                max-width: 85%;
+                left: 1rem;
+                bottom: 1rem;
+                padding: 0.8rem;
+            }
+
+            .property-price {
+                font-size: 1.2rem;
+            }
+
+            .title-xl {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 0.7rem;
+            }
+
+            .nav-arrow {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+            }
+
+            .locations-container {
+                flex-direction: column;
+            }
+
+            .locations-sidebar {
+                width: 100%;
+                height: 35%;
+                padding: 1rem;
+            }
+
+            .locations-carousel {
+                width: 100%;
+                height: 65%;
+            }
+
+            .locations-title {
+                font-size: 1.5rem;
+            }
+
+            .cities-list {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .city-btn {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.6rem;
+            }
+
+            .carousel-card {
+                min-width: 280px;
+                width: 280px;
+            }
+
+            .carousel-card-image {
+                height: 200px;
+            }
+
+            .selection-bottom-row {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .selection-image {
+                width: 100%;
+                height: 60%;
+            }
+
+            .selection-details {
+                width: 100%;
+                height: 40%;
+            }
+
+            .selection-details .detail-price {
+                font-size: 1.2rem;
+            }
+
+            .nav-menu {
+                max-width: 90%;
+                padding: 1rem;
+            }
+
+            .nav-tab {
+                margin-left: 1rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .nav-item {
+                padding: 0.6rem 0.8rem;
+                min-width: 65px;
+            }
+
+            .nav-item i {
+                font-size: 1rem;
+            }
+
+            .nav-item span {
+                font-size: 0.6rem;
+            }
+        }
