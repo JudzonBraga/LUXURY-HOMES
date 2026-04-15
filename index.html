@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>LUXURY HOMES | Inmobiliaria de lujo en Lima - Perú</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="nav-overlay" id="navOverlay"></div>
+    <div class="side-nav-container">
+        <div class="nav-tab" id="navTab">
+            <i class="fas fa-bars"></i>
+            <span style="font-size: 0.7rem; margin-left: 0.5rem;">MENÚ</span>
+        </div>
+    </div>
+    <div class="nav-menu" id="navMenu">
+        <button class="nav-close" id="navClose"><i class="fas fa-times"></i></button>
+        <h3>✦ LUXURY HOMES ✦</h3>
+        <div class="nav-items-container">
+            <a class="nav-item" data-section="0"><i class="fas fa-home"></i><span>INICIO</span></a>
+            <a class="nav-item" data-section="1"><i class="fas fa-building"></i><span>PRIVADA</span></a>
+            <a class="nav-item" data-section="locations"><i class="fas fa-map-marker-alt"></i><span>DESTINOS</span></a>
+            <a class="nav-item" data-section="3"><i class="fas fa-gem"></i><span>EXCELENCIA</span></a>
+            <a class="nav-item" data-section="4"><i class="fas fa-map-marker-alt"></i><span>COLECCIONES</span></a>
+            <a class="nav-item" data-section="contact"><i class="fas fa-phone-alt"></i><span>CONTACTO</span></a>
+        </div>
+    </div>
+
+    <div class="vertical-container" id="verticalContainer">
+        <section class="vertical-section">
+            <video class="bg-media" autoplay muted loop playsinline>
+                <source src="https://videos.pexels.com/video-files/17380735/17380735-hd_1920_1080_25fps.mp4"
+                    type="video/mp4">
+            </video>
+            <div class="overlay-text">
+                <div class="subtitle">LIMA · PERÚ</div>
+                <h1 class="title-xl">RESIDENCIAS EXCEPCIONALES</h1>
+                <p class="description">Casas y departamentos de ultra lujo en las zonas más exclusivas de la capital.
+                </p>
+                <a href="#propiedades" class="btn-luxury" id="exploreBtn">EXPLORAR COLECCIONES</a>
+            </div>
+            <div class="scroll-hint">DESLIZA PARA DESCUBRIR ▼</div>
+        </section>
+
+        <section class="vertical-section" id="propiedades">
+            <div class="horizontal-label">✦ COLECCIÓN PRIVADA ✦</div>
+            <div class="horizontal-scroll" id="horizontalScroll">
+                <div class="horizontal-item">
+                    <video class="bg-media" autoplay muted loop playsinline>
+                        <source src="https://cdn.pixabay.com/video/2025/02/11/257796_large.mp4" type="video/mp4">
+                    </video>
+                    <div class="property-card-info">
+                        <div class="property-price">USD 2,450,000</div>
+                        <div class="property-name">Penthouse Panorámico · San Isidro</div>
+                        <p style="font-size: 0.8rem;">3 suites · Terraza 180m² · Vista al golf</p>
+                    </div>
+                </div>
+                <div class="horizontal-item">
+                    <img class="bg-media"
+                        src="https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                        alt="Casa lujo La Molina">
+                    <div class="property-card-info">
+                        <div class="property-price">USD 3,890,000</div>
+                        <div class="property-name">Mansión Contemporánea · La Molina</div>
+                        <p style="font-size: 0.8rem;">5 dormitorios · Piscina infinita · Home cinema</p>
+                    </div>
+                </div>
+                <div class="horizontal-item">
+                    <video class="bg-media" autoplay muted loop playsinline>
+                        <source src="https://cdn.pixabay.com/video/2025/02/11/257795_large.mp4" type="video/mp4">
+                    </video>
+                    <div class="property-card-info">
+                        <div class="property-price">USD 5,200,000</div>
+                        <div class="property-name">Frente al mar · Miraflores</div>
+                        <p style="font-size: 0.8rem;">Dúplex con vista al océano · Infinity pool</p>
+                    </div>
+                </div>
+                <div class="horizontal-item">
+                    <img class="bg-media"
+                        src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                        alt="Casa Barranco">
+                    <div class="property-card-info">
+                        <div class="property-price">USD 1,975,000</div>
+                        <div class="property-name">Atelier Barranco · Arte y diseño</div>
+                        <p style="font-size: 0.8rem;">Loft de autor · Terraza con jacuzzi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-arrow nav-left" id="scrollLeft"><i class="fas fa-chevron-left"></i></div>
+            <div class="nav-arrow nav-right" id="scrollRight"><i class="fas fa-chevron-right"></i></div>
+            <div class="scroll-hint" style="bottom: 1rem;">← → DESLIZA PROPIEDADES</div>
+        </section>
+
+        <section class="vertical-section" id="locations-section">
+            <div class="locations-container">
+                <div class="locations-sidebar">
+                    <h2 class="locations-title">DESTINOS<br>EXCLUSIVOS</h2>
+                    <div class="locations-subtitle">✦ UBICACIONES PREMIUM ✦</div>
+                    <div class="cities-list" id="citiesList">
+                        <button class="city-btn" data-city="arequipa">AREQUIPA</button>
+                        <button class="city-btn" data-city="lima">LIMA</button>
+                        <button class="city-btn" data-city="huancayo">HUANCAYO</button>
+                        <button class="city-btn" data-city="ica">ICA</button>
+                        <button class="city-btn" data-city="piura">PIURA</button>
+                        <button class="city-btn" data-city="ucayali">UCAYALI</button>
+                        <button class="city-btn" data-city="cajamarca">CAJAMARCA</button>
+                        <button class="city-btn" data-city="cusco">CUSCO</button>
+                    </div>
+                </div>
+                <div class="locations-carousel" id="locationsCarousel"></div>
+            </div>
+        </section>
+
+        <section class="vertical-section">
+            <video class="bg-media" autoplay muted loop playsinline>
+                <source
+                    src="https://media.istockphoto.com/id/1335537245/video/excited-couple-for-new-house.mp4?s=mp4-640x640-is&k=20&c=PqUygRyaqdsKuR0C4r_UEG1t1QQUKlwI2dtUxoywiZY="
+                    type="video/mp4">
+            </video>
+            <div class="overlay-text">
+                <div class="subtitle">EXCELENCIA & DISEÑO</div>
+                <h2 class="title-xl">UNA EXPERIENCIA ÚNICA</h2>
+                <p class="description">Cada residencia es una obra maestra que fusiona tecnología, sostenibilidad y
+                    elegancia atemporal.</p>
+                <a href="#" class="btn-luxury" id="contactBtn">CONTACTAR CONSULTOR</a>
+            </div>
+        </section>
+
+        <section class="vertical-section">
+            <img class="bg-media"
+                src="https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                alt="Lima vista aérea">
+            <div class="overlay-text">
+                <div class="subtitle">LIMA · LA CAPITAL DE LOS SENTIDOS</div>
+                <h2 class="title-xl">LAS COLECCIONES</h2>
+                <p class="description">Descubra departamentos con skyline, casas en zonas residenciales de máxima
+                    seguridad.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                    <a href="#" class="btn-luxury" style="background: #D4AF37; color:#0A0A0A;">VER CATÁLOGO</a>
+                    <a href="#" class="btn-luxury">SOLICITAR VISITA</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>LUXURY HOMES PERÚ · Propiedades excepcionales · +51 1 789 1234</p>
+        <p>© 2025 — Diseño inspirado en la Alta Relojería</p>
+    </footer>
+<script src="javascript.js"></script>
+</body>
+
+</html>
